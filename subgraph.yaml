@@ -1,0 +1,47 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: EmytoTokenEscrow
+    network: ropsten
+    source:
+      address: "0xa96D960dcEE05c77508b2F628706c5F7dF853DfB"
+      abi: EmytoTokenEscrow
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - CreateEscrow
+        - SignedCreateEscrow
+        - CancelSignature
+        - Deposit
+        - Withdraw
+        - Cancel
+        - SetEmytoFee
+        - EmytoWithdraw
+        - OwnershipTransferred
+      abis:
+        - name: EmytoTokenEscrow
+          file: ./abis/EmytoTokenEscrow.json
+      eventHandlers:
+        - event: CreateEscrow(bytes32,address,address,address,uint256,address,uint256)
+          handler: handleCreateEscrow
+        - event: SignedCreateEscrow(bytes32,bytes)
+          handler: handleSignedCreateEscrow
+        - event: CancelSignature(bytes)
+          handler: handleCancelSignature
+        - event: Deposit(bytes32,uint256,uint256)
+          handler: handleDeposit
+        - event: Withdraw(bytes32,address,address,uint256,uint256)
+          handler: handleWithdraw
+        - event: Cancel(bytes32,uint256)
+          handler: handleCancel
+        - event: SetEmytoFee(uint256)
+          handler: handleSetEmytoFee
+        - event: EmytoWithdraw(address,address,uint256)
+          handler: handleEmytoWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/EmytoTokenEscrowMapping.ts
