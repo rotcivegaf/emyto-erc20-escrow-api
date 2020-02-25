@@ -10,7 +10,7 @@ import {
   EmytoWithdraw,
   OwnershipTransferred
 } from "../generated/EmytoTokenEscrow/EmytoTokenEscrow"
-import { Escrow, EscrowHistory, EmytoBalance, Emyto, CanceledSignatures } from "../generated/schema"
+import { Escrow, EscrowHistory, EmytoBalance, Emyto, CanceledSignature } from "../generated/schema"
 
 let BI0 = BigInt.fromI32(0);
 
@@ -45,9 +45,12 @@ export function handleSignedCreateEscrow(event: SignedCreateEscrow): void {
 }
 
 export function handleCancelSignature(event: CancelSignature): void {
-  if (CanceledSignatures.load(event.params._agentSignature.toHex()) == null) {
-    let canceledSignatures = new CanceledSignatures(event.params._agentSignature.toHex());
+  let id = event.transaction.from.toHex() + "_" + event.params._agentSignature.toHex();
 
+  if (CanceledSignature.load(id) == null) {
+    let canceledSignatures = new CanceledSignature(id);
+
+    canceledSignatures.signer = event.transaction.from;
     canceledSignatures.signature = event.params._agentSignature;
 
     canceledSignatures.save();

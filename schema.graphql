@@ -12,18 +12,6 @@ enum EventName {
   Cancel
 }
 
-type Emyto @entity {
-  id: ID!
-  owner: Bytes! # address
-  fee: BigInt!
-}
-
-type EmytoBalance @entity {
-  id: ID!
-  token: Bytes! # address
-  balance: BigInt!
-}
-
 type Escrow @entity {
   id: ID!
   escrowId: Bytes! # bytes32
@@ -53,7 +41,20 @@ type EscrowHistory @entity {
   timestamp: BigInt!
 }
 
-type CanceledSignatures @entity {
+type CanceledSignature @entity {
   id: ID!
+  signer: Bytes! # address
   signature: Bytes!
+}
+
+type Emyto @entity {
+  id: ID!
+  owner: Bytes! # address
+  fee: BigInt!
+}
+
+type EmytoBalance @entity {
+  id: ID!
+  token: Bytes! # address
+  balance: BigInt!
 }
