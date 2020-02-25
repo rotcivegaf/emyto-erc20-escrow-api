@@ -2,3 +2,4 @@
 /yarn.lock
 /build/
 /generated/
+/package-lock.json

@@ -1,6 +1,5 @@
 import { BigInt, Bytes } from "@graphprotocol/graph-ts"
 import {
-  Contract,
   CreateEscrow,
   SignedCreateEscrow,
   CancelSignature,
@@ -10,7 +9,7 @@ import {
   SetEmytoFee,
   EmytoWithdraw,
   OwnershipTransferred
-} from "../generated/Contract/Contract"
+} from "../generated/EmytoTokenEscrow/EmytoTokenEscrow"
 import { Escrow, EscrowHistory, EmytoBalance, Emyto, CanceledSignatures } from "../generated/schema"
 
 let BI0 = BigInt.fromI32(0);
