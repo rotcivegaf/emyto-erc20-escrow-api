@@ -1,0 +1,19 @@
+{
+  "name": "emyto-escrow-api",
+  "version": "1.0.0",
+  "description": "",
+  "author": "rotcivegaf",
+  "license": "",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ rotcivegaf/emyto_escrow_api",
+    "create-local": "graph create --node http://localhost:8020/ rotcivegaf/emyto_escrow_api",
+    "remove-local": "graph remove --node http://localhost:8020/ rotcivegaf/emyto_escrow_api",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 rotcivegaf/emyto_escrow_api"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.17.1",
+    "@graphprotocol/graph-ts": "0.17.0"
+  }
+}
