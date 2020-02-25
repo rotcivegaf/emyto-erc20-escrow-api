@@ -1,0 +1,59 @@
+enum State {
+  Created,
+  WithdrawnAll,
+  ToWithdraw,
+  Cancel
+}
+
+enum EventName {
+  Create,
+  Deposit,
+  Withdraw,
+  Cancel
+}
+
+type Emyto @entity {
+  id: ID!
+  owner: Bytes! # address
+  fee: BigInt!
+}
+
+type EmytoBalance @entity {
+  id: ID!
+  token: Bytes! # address
+  balance: BigInt!
+}
+
+type Escrow @entity {
+  id: ID!
+  escrowId: Bytes! # bytes32
+  agent: Bytes! # address
+  depositant: Bytes! # address
+  retreader: Bytes! # address
+  fee: BigInt!
+  token: Bytes! # address
+  salt: BigInt!
+  agentSignature: Bytes!
+
+  balance: BigInt!
+  emytoFeeCharged: BigInt!
+  agentFeeCharged: BigInt!
+  state: State!
+}
+
+type EscrowHistory @entity {
+  id: ID!
+  escrowId: Bytes! # bytes32
+
+  balance: BigInt!
+  emytoFeeCharged: BigInt!
+  agentFeeCharged: BigInt!
+  state: State!
+  eventName: EventName!
+  timestamp: BigInt!
+}
+
+type CanceledSignatures @entity {
+  id: ID!
+  signature: Bytes!
+}
